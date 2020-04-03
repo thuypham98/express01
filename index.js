@@ -44,5 +44,5 @@ class Tinh{
     }
 }
 
-// const pt = new Tinh('cong', 8, 7);
-// console.log(pt.getResultString()); // 8 + 7 = 15
+// const pt = new Tinh('tru', 8, 7);
+// console.log(pt.getResultString()); // 8 - 7 = 1
