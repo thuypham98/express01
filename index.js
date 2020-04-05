@@ -1,20 +1,14 @@
-const express = require('express'); //require thư viện express
-// const app = require('express')();
-const app = express(); 
+const express = require('express');
 
-const handle = (req, res) => {
-    // const name = req.params.name;
-    // const age = req.params.age;
+const app = express();
 
-    //or
-    const { name, age } = req.params;
-    res.send(`Xin chao ${name} ${age} tuoi`);
-}
+//ejs: template engine - công cụ thao tác với html
 
-//chỉ đáp trả 1 lần
-app.get('/hello/:name/:age', handle); 
+app.set('views', './views'); //set thư mục chưa các file template engine
+app.set('view engine', 'ejs'); //set view engine sử dụng ejs
 
-app.get('/tinh/:tenPhepTinh/:soA/:soB', require('./controllers/tinhController'));
+// app.get('/', (req, res) => res.send('<h1 style = "color: red;">Hello world</h1>'));
+app.get('/', (req, res) => res.render('home'));
 
-app.listen(3000)//port 0 -> 65000
 
+app.listen(3000, () => console.log('Server started'));
