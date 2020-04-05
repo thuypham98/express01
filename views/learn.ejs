@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejs - Learn Route</title>
+</head>
+<% 
+    const name = 'Ronaldo Cris';
+    const isAdmin = true;
+    const arrSubject = ['NodeJS', 'Angular', 'Mongo', 'Express'];
+%>
+<body>
+    <h1>Hello <%= name + 1 %></h1><!-- <%= %> : binding data -->
+
+    <% if(isAdmin){ %>
+        <a href="#">Trang quan tri</a>
+    <% } else{ %>
+        <a href="#">Quay lai</a>
+    <% } %>
+
+    <% arrSubject.forEach(subject => { %>
+        <h3><%= subject %></h3>
+    <% }); %>
+</body>
+</html>

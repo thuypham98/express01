@@ -2,6 +2,9 @@ const express = require('express'); //require thư viện express
 // const app = require('express')();
 const app = express(); 
 
+//ejs: template engine - công cụ thao tác với html
+//nodemon: when change code, auto restart server
+
 const handle = (req, res) => {
     // const name = req.params.name;
     // const age = req.params.age;
