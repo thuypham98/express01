@@ -2,16 +2,9 @@ const express = require('express');
 
 const app = express();
 
+const upload = require('./controllers/uploadConfig'); //upload file
+
 //ejs: template engine - công cụ thao tác với html
-
-//upload file
-const multer = require('multer');
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => cb(null, './public'),
-    filename: (req, file, cb) => cb(null, Date.now() + file.originalname )
-});
-
-const upload = multer({ storage }); // storage <=> storage: storage
 
 app.set('views', './views'); //set thư mục chưa các file view template engine
 app.set('view engine', 'ejs'); //set view engine sử dụng ejs
@@ -30,11 +23,20 @@ app.get('/learn', (req, res) => {
 });
 //=========================================================================
 
+// upload file. ( upload.single - upload 1 file, upload.array - upload nhiều file, upload.fields - thêm các option khác) - ( youtube buổi 10 )
 app.get('/sign-up', (req, res) => res.render('sign-up'));
-app.post('/signUp', upload.single('profile'), (req, res) => { // profile: tên của <input type="file" name="profile" />
-    res.send(req.body);
-})
+// app.post('/signUp', upload.single('profile'), (req, res) => { // profile: tên của <input type="file" name="profile" />
+//     res.send(req.body);
+// });
+app.post('/signUp', upload.array('profile'), (req, res) => { // 
+    res.send(req.files);
+});
 
+//handle lỗi, có lỗi sẽ nhảy vào middleware này
+app.use((err, req, res, next) => {
+    res.send(err.message);
+});
 
+app.get('*', (req, res) => res.send('Not found')); //không tìm thấy route
 
 app.listen(3000, () => console.log('Server listening on port 3000.'));

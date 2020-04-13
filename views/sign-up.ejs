@@ -7,11 +7,21 @@
 </head>
 <body>
 
-    <form action="/signUp" method="POST" enctype="multipart/form-data">
+    <!-- upload 1 file -->
+    <!-- <form action="/signUp" method="POST" enctype="multipart/form-data">
         <input type="text" name="email" placeholder="Email"><br>
         <input type="password" name="password" placeholder="Password"><br>
         <input type="file" name="profile" id=""><br><br>
-        <button type="submit">Sign Up</button>
+        <button type="submit">Sign Up 1</button>
+    </form> -->
+
+    <!-- upload nhiều file -->
+    <form action="/signUp" method="POST" enctype="multipart/form-data">
+        <input type="text" name="email" placeholder="Email"><br>
+        <input type="password" name="password" placeholder="Password"><br>
+        <input type="file" name="profile" id=""><br>
+        <input type="file" name="profile" id=""><br><br>
+        <button type="submit">Sign Up 2</button>
     </form>
     
 </body>
