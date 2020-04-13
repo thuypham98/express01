@@ -9,9 +9,17 @@
     const name = 'Ronaldo Cris';
     const isAdmin = true;
     const arrSubject = ['NodeJS', 'Angular', 'Mongo', 'Express'];
+    const someThing = '<h3>Thẻ h3</h3>';
 %>
 <body>
-    <h1>Hello <%= name + 1 %></h1><!-- <%= %> : binding data -->
+    <!-- <%= %> : binding data --> <!-- <%- %> : binding html -->
+    <h1>Hello <%= name + 1 %></h1>
+    <hr>
+    <h1>Thẻ ejs với = <%= someThing %></h1>
+    <h1>Thẻ ejs với - <%- someThing %></h1>
+    <hr>
+
+    <h2>Xin chào <%= username %></h2> <!-- username lấy từ index.js -->
 
     <% if(isAdmin){ %>
         <a href="#">Trang quan tri</a>
@@ -21,6 +29,10 @@
 
     <% arrSubject.forEach(subject => { %>
         <h3><%= subject %></h3>
+    <% }); %>
+    <hr>
+    <% arrPeople.forEach(person => { %> <!-- arrPeople lấy từ index.js -->
+         <%- include('./partials/personRow.ejs', { person }) %> <!-- truyền person sang personRow.ejs, person <=> person: person -->
     <% }); %>
 </body>
 </html>
