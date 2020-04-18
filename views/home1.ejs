@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mongo</title>
 </head>
+
 <body>
     <h3>Words</h3>
+    <form action="/addWords" method="POST">
+        <input type="text" name="en" placeholder="English"><br>
+        <input type="text" name="vn" placeholder="Vietnamese"><br>
+        <button>Add Words</button>
+    </form>
     <% arrWords.forEach(e => { %>
-        <h4><%= e.en %> : <%= e.vn %></h4>
+        <div style="border: 1px solid;">
+            <h4><%= e.en %> : <%= e.vn %></h4>
+            <a href="/deleteWords/<%= e._id %>">Xóa</a>
+            <a href="/editWords/<%= e._id %>">Sửa</a>
+        </div>
     <% }); %>
 </body>
+
 </html>

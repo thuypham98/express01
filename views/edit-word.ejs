@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Word</title>
+</head>
+<body>
+    <h3>Edit Word</h3>
+
+    <form action="/updateWord/<%= result._id %>" method="POST">
+        <input type="text" name="en" placeholder="English" value="<%= result.en %>"><br>
+        <input type="text" name="vn" placeholder="Vietnamese" value="<%= result.vn %>"><br>
+        <button>Edit Words</button>
+    </form>
+</body>
+</html>

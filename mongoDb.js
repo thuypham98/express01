@@ -1,3 +1,5 @@
+//buổi 13
+
 // table -> collection // record -> document
 
 // Show all db ~ show dbs ~ db
@@ -18,8 +20,9 @@
 // Update addToSet: tours.find({ tourTags: "wine" }, { tourName: 1, _id: 0, tourTags: 1 })
 // Drop a collection db.tours.drop()
 
-const { MongoClient } = require('mongodb'); // <=> const MongoClient = require('mongodb').MongoClient;
+const { MongoClient, ObjectId } = require('mongodb'); // <=> const MongoClient = require('mongodb').MongoClient;
 const express = require('express');
+const parser = require('body-parser').urlencoded({ extended: false }); //Lấy được dữ liệu nhập vào (như trong req.body), CẦN SỬ DỤNG BODYPARSER() NẾU MUỐN DATA FORM CÓ SẴN TRONG REQ.BODY
 
 let wordsCollection;
 
@@ -34,13 +37,46 @@ app.get('/', (req, res) => {
     .catch(err => res.send(err.message));
 });
 
+//insert data (sử dụng body-parser)
+app.post('/addWords', parser, (req, res) => {
+    const { en, vn } = req.body;
+    console.log( en, vn );
+    wordsCollection.insert({ en, vn })
+    .then(() => res.redirect('/'))
+    .catch(err => res.send(err.message));
+});
+
+//remove data
+app.get(`/deleteWords/:wordId`, (req, res) => {
+    const { wordId } = req.params;
+    wordsCollection.remove({ _id: ObjectId(wordId)})
+    .then(() => res.redirect('/'))
+    .catch(err => res.send(err.message));
+});
+
+//Edit data
+app.get('/editWords/:wordId', (req, res) => {
+    const id = req.params.wordId;
+    wordsCollection.findOne({ _id: ObjectId(id)})
+    // .then(result => res.send(result))
+    .then(result => res.render('edit-word', { result })) //gửi { result: result } đến edit-word.ejs
+    .catch(err => res.send(err.message));
+});
+app.post('/updateWord/:wordId', parser, (req, res) => {
+    const { wordId } = req.params;
+    const { en, vn } = req.body;
+    wordsCollection.updateOne({ _id: ObjectId(wordId)}, { en, vn })
+    .then(() => res.redirect('/'))
+    .catch(err => res.send(err.message));
+});
+
 const url = 'mongodb://localhost:27017/shop';
 
 // MongoClient.connect(url, { useUnifiedTopology: true }) // for new version
 MongoClient.connect(url)
 .then(db => {
     app.listen(3000, () => console.log('Server port 3000 started!')); //bất đồng bộ.  //connect db xong mới khởi động server
-    wordsCollection = db.collection('words'); //lấy ra collection words
+    wordsCollection = db.collection('words'); //lấy ra collection words (chạy trước dòng trên)
 })
 // .then(result => console.log(result))
 .catch(err => console.log(err.message));
