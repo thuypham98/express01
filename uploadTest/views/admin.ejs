@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+</head>
+<body>
+    <div>
+        <table class="table" border="1" cellspacing="0" cellpadding="5" style="text-align: center;">
+          <thead>
+            <tr>
+              <th scope="col">No</th>
+              <th scope="col">Name</th>
+              <th scope="col">Image</th>
+              <th scope="col">Description</th>
+              <th scope="col">Video</th>
+              <th>Edit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% products.forEach(product => { %>
+                <tr>
+              <th scope="row"><%= product._id %></th>
+              <td><%= product.name %></td>
+              <td><%= product.image %></td>
+              <td><%= product.desc %></td>
+              <td><iframe src="http://player.vimeo.com/video/<%= product.video %>?api=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;color=7d7d7d" videotype="vimeo" width="200" height="100" frameborder="0" webkitAllowFullScreen allowFullScreen></iframe></td>
+              <td>
+                  <a href="/edit/<%= product._id %>">Sửa</a>
+                  <a href="/delete/<%= product._id %>">Xóa</a>
+              </td>
+            </tr>
+            <% }); %>
+            
+          </tbody>
+        </table>
+    </div>
+    
+</body>
+</html>

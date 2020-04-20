@@ -15,7 +15,7 @@
         <button>Add Words</button>
     </form>
     <% arrWords.forEach(e => { %>
-        <div style="border: 1px solid;">
+        <div style="border: 1px solid; max-width: 300px; padding: 10px;">
             <h4><%= e.en %> : <%= e.vn %></h4>
             <a href="/deleteWords/<%= e._id %>">Xóa</a>
             <a href="/editWords/<%= e._id %>">Sửa</a>
